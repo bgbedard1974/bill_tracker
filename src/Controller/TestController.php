@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Model\Bills;
+use App\Model\BillsByMonth;
+use App\Model\Config;
 use App\Service\YamlHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,32 +25,22 @@ class TestController extends AbstractController
     }
 
     /**
-     * @Route("/mark/{id}/{type}", name="mark")
+     * @Route("/mark/{id}/{mark}", name="mark")
      * @param string $id
-     * @param string $type
-     * @param YamlHandler $handler
+     * @param string $mark
+     * @param YamlHandler $yaml
      * @return Response
      */
-    public function mark(string $id, string $type, YamlHandler $handler): Response
+    public function mark(string $id, string $mark, YamlHandler $yaml): Response
     {
-        $data = $handler->readYaml('/data/12_2020.yml');
+        $config = new Config();
+        $month = $config->getActiveMonth();
 
-        //$id = 'int';
-        $marks = [
-            'paid' => 'X',
-            'skipped' => '--'
-        ];
-        $mark = $marks[$type];
-
-        $bills = new Bills('12_20', $data['bills']);
-        $bills->markBill($id, $mark);
-
-        $data = [];
-        $data['bills'] = $bills->getData();
-
-        dump($data);
-
-        $handler->writeYaml('/data/12_2020.yml', $data);
+        $bills = new BillsByMonth($month, $yaml);
+        if (in_array($mark, $config->getValidMarks())) {
+            $bills->markBill($id, $mark);
+            $bills->save();
+        }
 
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
@@ -59,16 +50,13 @@ class TestController extends AbstractController
     /**
      * @Route("/create/{month}", name="create")
      * @param string $month
-     * @param YamlHandler $handler
+     * @param YamlHandler $yaml
      * @return Response
      */
-    public function create(string $month, YamlHandler $handler): Response
+    public function create(string $month, YamlHandler $yaml): Response
     {
-        $data = $handler->readYaml('/data/template.yml');
-
-        $filename = '/data/' . $month . '.yml';
-
-        $handler->writeYaml($filename, $data);
+        $bills = new BillsByMonth($month, $yaml);
+        $bills->save();
 
         return new Response("<h1>Month Created</h1>");
     }

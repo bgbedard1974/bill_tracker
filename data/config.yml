@@ -1,5 +1,8 @@
 config:
   active_month: '12_2020'
+  valid_marks:
+    - 'paid'
+    - 'skipped'
   bills:
     - name: 'Mortgage'
       id: 'mrt'

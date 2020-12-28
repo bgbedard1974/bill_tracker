@@ -33,3 +33,4 @@ services:
     App\Service\YamlHandler:
         arguments:
             $project_dir: '%kernel.project_dir%'
+            $template_file: '/data/template.yml'
