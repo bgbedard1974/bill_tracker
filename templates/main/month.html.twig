@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2>Bills for [[MONTH]]</h2>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h3>Block A</h3>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Bill</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mortgate</td>
+                            <td>
+                                <a class="btn btn-success" href="#">PAID</a>
+                                <a class="btn btn-primary" href="#">SKIPPED</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Association Fee</td>
+                            <td>
+                                <a class="btn btn-success" href="#">PAID</a>
+                                <a class="btn btn-primary" href="#">SKIPPED</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Natural Gas</td>
+                            <td>
+                                PAID
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="col-6">
+                <h3>Block B</h3>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <td>Bill</td>
+                        <td>Action</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Mortgate</td>
+                        <td>
+                            <a class="btn btn-success" href="#">PAID</a>
+                            <a class="btn btn-primary" href="#">SKIPPED</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Association Fee</td>
+                        <td>
+                            <a class="btn btn-success" href="#">PAID</a>
+                            <a class="btn btn-primary" href="#">SKIPPED</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Natural Gas</td>
+                        <td>
+                            PAID
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
