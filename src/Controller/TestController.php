@@ -15,13 +15,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/mark/{id}/{type}", name="index")
+     * @Route("/", name="index")
+     * @return Response
+     */
+    public function index(): Response
+    {
+        return $this->render('test/index.html.twig');
+    }
+
+    /**
+     * @Route("/mark/{id}/{type}", name="mark")
      * @param string $id
      * @param string $type
      * @param YamlHandler $handler
      * @return Response
      */
-    public function index(string $id, string $type, YamlHandler $handler): Response
+    public function mark(string $id, string $type, YamlHandler $handler): Response
     {
         $data = $handler->readYaml('/data/12_2020.yml');
 
