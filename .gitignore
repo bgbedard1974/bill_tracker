@@ -8,3 +8,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+.gitignore
+.idea/
+**/.DS_Store
