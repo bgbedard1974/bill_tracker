@@ -17,48 +17,27 @@ class TestController extends AbstractController
 {
     /**
      * @Route("/", name="index")
+     * @param YamlHandler $yaml
      * @return Response
      */
-    public function index(): Response
+    public function index(YamlHandler $yaml): Response
     {
+        $data = $yaml->readYaml('/data/template_b.yml');
+
+        $id = 'asf';
+        $mark = 'skipped';
+
+        $data['bills'][$id] = $mark;
+
+        dump($data);
+
+        $yaml->writeYaml('/data/11_2020.yml', $data);
+
         return $this->render('test/index.html.twig');
     }
 
-    /**
-     * @Route("/mark/{id}/{mark}", name="mark")
-     * @param string $id
-     * @param string $mark
-     * @param YamlHandler $yaml
-     * @return Response
-     */
-    public function mark(string $id, string $mark, YamlHandler $yaml): Response
-    {
-        $config = new Config();
-        $month = $config->getActiveMonth();
 
-        $bills = new BillsByMonth($month, $yaml);
-        if (in_array($mark, $config->getValidMarks())) {
-            $bills->markBill($id, $mark);
-            $bills->save();
-        }
 
-        return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
-        ]);
-    }
 
-    /**
-     * @Route("/create/{month}", name="create")
-     * @param string $month
-     * @param YamlHandler $yaml
-     * @return Response
-     */
-    public function create(string $month, YamlHandler $yaml): Response
-    {
-        $bills = new BillsByMonth($month, $yaml);
-        $bills->save();
-
-        return new Response("<h1>Month Created</h1>");
-    }
 
 }

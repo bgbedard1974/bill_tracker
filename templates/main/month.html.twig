@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h2>Bills for [[MONTH]]</h2>
+                <h2>Bills for {{ month }}</h2>
                 <hr />
             </div>
         </div>
@@ -12,72 +12,14 @@
             <div class="col-6">
                 <h3>Block A</h3>
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>Bill</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mortgage</td>
-                            <td>
-                                <a class="btn btn-success" href="#">PAID</a>
-                                <a class="btn btn-primary" href="#">SKIPPED</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Association Fee</td>
-                            <td>
-                                <a class="btn btn-success" href="#">PAID</a>
-                                <a class="btn btn-primary" href="#">SKIPPED</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Natural Gas</td>
-                            <td>
-                                PAID
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                {% include 'inc/table.html.twig' with { is_active_month: is_active_month, bills: block_a } %}
 
             </div>
             <div class="col-6">
                 <h3>Block B</h3>
 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <td>Bill</td>
-                        <td>Action</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Car</td>
-                        <td>
-                            <a class="btn btn-success" href="#">PAID</a>
-                            <a class="btn btn-primary" href="#">SKIPPED</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Target Card</td>
-                        <td>
-                            <a class="btn btn-success" href="#">PAID</a>
-                            <a class="btn btn-primary" href="#">SKIPPED</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Electricity</td>
-                        <td>
-                            PAID
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                {% include 'inc/table.html.twig' with { is_active_month: is_active_month, bills: block_b }  %}
+
             </div>
         </div>
     </div>

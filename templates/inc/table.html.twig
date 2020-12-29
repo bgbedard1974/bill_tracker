@@ -1,0 +1,31 @@
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Bill</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bill in bills %}
+        <tr>
+            <td>{{ bill.name }}</td>
+            <td>
+                {% if is_active_month %}
+                    {% if bill.value %}
+                        <em>{{ bill.value|upper }}</em>
+                    {% else %}
+                        <a class="btn btn-success" href="{{ path('mark', {id: bill.id, mark: 'paid'}) }}">PAID</a>
+                        <a class="btn btn-primary" href="{{ path('mark', {id: bill.id, mark: 'skipped'}) }}">SKIPPED</a>
+                    {% endif %}
+
+                {% else %}
+                    <em>{{ bill.value|upper }}</em>
+                {% endif %}
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
