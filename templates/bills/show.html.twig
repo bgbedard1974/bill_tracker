@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2>Bills for {{ month_text }}</h2>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary" href="{{ path('bills.show', {'month': prev_month}) }}">Previous Month</a>
+                <a class="btn btn-primary" href="{{ path('bills.show', {'month': next_month}) }}">Next Month</a>
+
+                {% if not is_active_month %}
+                <a class="btn btn-success" href="{{ path('bills.activate', {'month': month}) }}">Activate Month</a>
+                {% endif %}
+
+                <hr />
+            </div>
+        </div>
+        {% if no_data %}
+
+            <p>There is no data for this month. <a class="btn btn-success" href="{{ path('bills.create', {'month': month}) }}">Add Bills</a></p>
+
+        {% else %}
+
+        <div class="row">
+            <div class="col-6">
+                <h3>Block A</h3>
+
+                {% include 'inc/table.html.twig' with { is_active_month: is_active_month, bills: block_a } %}
+
+            </div>
+            <div class="col-6">
+                <h3>Block B</h3>
+
+                {% include 'inc/table.html.twig' with { is_active_month: is_active_month, bills: block_b }  %}
+
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

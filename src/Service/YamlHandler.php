@@ -15,6 +15,7 @@ class YamlHandler
     public function __construct($project_dir, $template_file)
     {
         $this->projectDir = $project_dir;
+        $this->templateFile = $template_file;
     }
 
     public function readYaml($filename)
@@ -38,7 +39,7 @@ class YamlHandler
         return $this->projectDir . $filename;
     }
 
-    public function fileExists($filename): boolean
+    public function fileExists($filename): bool
     {
         $file_path = $this->getFilePath($filename);
         return file_exists($file_path);

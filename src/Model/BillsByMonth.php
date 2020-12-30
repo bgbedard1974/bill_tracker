@@ -6,6 +6,7 @@ namespace App\Model;
 
 use App\Service\YamlHandler;
 
+
 class BillsByMonth
 {
     private $data;
@@ -13,15 +14,18 @@ class BillsByMonth
     private $yaml;
     private $inputFile;
     private $outputFile;
+    private $fileExists;
 
-    public function __construct($month, YamlHandler $yaml)
+    public function __construct(string $month, YamlHandler $yaml)
     {
         $this->yaml = $yaml;
         $filename = '/data/' .$month . '.yml';
         if (!$yaml->fileExists($filename)) {
+            $this->fileExists = false;
             $this->inputFile = $this->yaml->getTemplateFile();
             $this->outputFile = $filename;
         } else {
+            $this->fileExists = true;
             $this->inputFile = $filename;
             $this->outputFile = $filename;
 
@@ -34,16 +38,7 @@ class BillsByMonth
 
     public function markBill($bill_id, $mark)
     {
-        $index = 0;
-
-        foreach ($this->data as $key => $bill) {
-            if ($bill['bill_id'] === $bill_id) {
-                $index = $key;
-                break;
-            }
-        }
-
-        $this->data[$index]['value'] = $mark;
+        $this->data[$bill_id] = $mark;
     }
 
     public function save()
@@ -58,9 +53,37 @@ class BillsByMonth
         return $this->data;
     }
 
-    public function getMonth()
+    public function getMonth(): string
     {
         return $this->month;
+    }
+
+    public function fileDoesExist(): bool
+    {
+        return $this->fileExists;
+    }
+
+    public function getViewData(Bills $bills): array
+    {
+        $block_a_bills = $bills->getBillsByBlock('a');
+
+        $block_a = [];
+        foreach ($block_a_bills as $bill) {
+            $bill['value'] = $this->data[$bill['id']];
+            $block_a[] = $bill;
+        }
+
+        $block_b_bills = $bills->getBillsByBlock('b');
+        $block_b = [];
+        foreach ($block_b_bills as $bill) {
+            $bill['value'] = $this->data[$bill['id']];
+            $block_b[] = $bill;
+        }
+
+        return [
+            'block_a' => $block_a,
+            'block_b' => $block_b
+        ];
     }
 
 }

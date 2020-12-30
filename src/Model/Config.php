@@ -17,7 +17,7 @@ class Config
     public function __construct(YamlHandler $yaml)
     {
         $this->yaml = $yaml;
-        $filename = $this->yaml->getTemplateFile() . self::CONFIG_FILE;
+        $filename = self::CONFIG_FILE;
         $yaml_data = $this->yaml->readYaml($filename);
         $this->bills = $yaml_data['config']['bills'];
         $this->activeMonth = $yaml_data['config']['active_month'];
@@ -30,10 +30,11 @@ class Config
         $yaml_data['config'] =
             [
                 'bills' => $this->bills,
-                'active_month' => $this->activeMonth
+                'active_month' => $this->activeMonth,
+                'valid_marks' => $this->validMarks
 
             ];
-        $filename = $this->yaml->getTemplateFile() . self::CONFIG_FILE;
+        $filename = self::CONFIG_FILE;
         $this->yaml->writeYaml($filename, $yaml_data);
     }
 

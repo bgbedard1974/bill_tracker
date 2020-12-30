@@ -15,8 +15,8 @@
                     {% if bill.value %}
                         <em>{{ bill.value|upper }}</em>
                     {% else %}
-                        <a class="btn btn-success" href="{{ path('mark', {id: bill.id, mark: 'paid'}) }}">PAID</a>
-                        <a class="btn btn-primary" href="{{ path('mark', {id: bill.id, mark: 'skipped'}) }}">SKIPPED</a>
+                        <a class="btn btn-success" href="{{ path('bills.mark', {id: bill.id, mark: 'paid'}) }}">PAID</a>
+                        <a class="btn btn-primary" href="{{ path('bills.mark', {id: bill.id, mark: 'skipped'}) }}">SKIPPED</a>
                     {% endif %}
 
                 {% else %}

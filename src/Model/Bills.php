@@ -17,7 +17,7 @@ class Bills
     {
         $index = 0;
         foreach ($this->data as $key => $bill) {
-            if ($bill['id'] === $key) {
+            if ($bill['id'] === $id) {
                 $index = $key;
                 break;
             }

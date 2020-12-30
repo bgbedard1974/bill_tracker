@@ -1,8 +1,8 @@
 bills:
-  - { bill_id: 'mrt', value: '' }
-  - { bill_id: 'asf', value: '' }
-  - { bill_id: 'gas', value: '' }
-  - { bill_id: 'ele', value: '' }
-  - { bill_id: 'car', value: '' }
-  - { bill_id: 'int', value: '' }
-  - { bill_id: 'tgc', value: '' }
+    mrt: ''
+    asf: ''
+    gas: ''
+    ele: ''
+    car: ''
+    int: ''
+    tgc: ''
