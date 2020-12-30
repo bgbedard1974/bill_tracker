@@ -108,4 +108,6 @@ class BillsController extends AbstractController
         $this->addFlash('success', 'Month Activated.');
         return $this->redirect($this->generateUrl('bills.show', ['month' => $month]));
     }
+
+    // Comment
 }
